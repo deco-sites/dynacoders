@@ -13,6 +13,11 @@ export interface Props {
     layout?: {
         card?: CardLayout;
         columns?: Columns;
+        // Changes
+        flagText?: string;
+        flagTextColor?: string;
+        flagColor?: string;
+        // end of changes
     };
 }
 
@@ -37,6 +42,12 @@ function ProductGalleryBF({ products, layout, offset }: Props) {
         <div class={`grid ${mobile} gap-2 items-center ${desktop} sm:gap-10`}>
             {products?.map((product, index) => (
                 <ProductCardBF
+                    // Changes
+                    flagOn={true} // Active or not the flags. By default on in every product included on blackFriday promotion.
+                    flagColor={layout?.flagColor} // Flag background color
+                    flagText={layout?.flagText} // Flag text content
+                    flagTextColor={layout?.flagTextColor} // Flag text color
+                    // End of changes
                     product={product}
                     preload={index === 0}
                     index={offset + index}

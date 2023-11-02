@@ -50,6 +50,12 @@ interface Props {
 
     layout?: Layout;
     platform?: Platform;
+    // Changes
+    flagColor?: string;
+    flagOn?: boolean;
+    flagText?: string;
+    flagTextColor?: string;
+    // end of changes
 }
 
 const relative = (url: string) => {
@@ -67,7 +73,13 @@ function ProductCardBF({
     layout,
     platform,
     index,
-}: Props) {
+    // Changes
+    flagOn,
+    flagColor,
+    flagText,
+    flagTextColor,
+}: // end of hanges
+Props) {
     const {
         url,
         productID,
@@ -126,20 +138,19 @@ function ProductCardBF({
             data-deco="view-product"
         >
             {/*console.log JUST SHOWING THE ID, REMOVE LATTER */}
-            <span>{productID}</span>
-            {/* {promotionFlag && (
+            {flagOn && (
                 <div
                     style={{
-                        background: layout?.flagColor,
-                        color: layout?.flagTextColor,
+                        background: flagColor,
+                        color: flagTextColor,
                     }}
                     class={`absolute right-[-40px] z-[1] top-5 flex h-fit w-3/4 rotate-45 items-center justify-center`}
                 >
                     <div class="mx-auto flex w-3/4 justify-center py-2">
-                        <p class="text-sm">{layout?.flagText}</p>
+                        <p class="text-sm">{flagText}</p>
                     </div>
                 </div>
-            )} */}
+            )}
             <SendEventOnClick
                 id={id}
                 event={{

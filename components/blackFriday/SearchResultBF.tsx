@@ -100,6 +100,12 @@ function Result({
                             layout={{
                                 card: cardLayout,
                                 columns: layout?.columns,
+                                // changes starts here
+                                flagText: blackFriday?.layout?.flagText,
+                                flagTextColor:
+                                    blackFriday?.layout?.flagTextColor,
+                                flagColor: blackFriday?.layout?.flagColor,
+                                // changes ends here
                             }}
                         />
                     </div>
