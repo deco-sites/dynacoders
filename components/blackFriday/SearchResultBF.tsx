@@ -21,12 +21,17 @@ export interface Layout {
 
 export interface BlackFridayLayout {
     // Changes made by us start here
+    /**
+     * @title Display on flag
+     */
     flagText?: string;
     /**
+     * @title text color
      * @format color
      */
     flagTextColor?: string;
     /**
+     * @title background color
      * @format color
      */
     flagColor?: string;
@@ -38,7 +43,6 @@ export interface BlackFriday {
      * @title Product ID
      * @description Insert the ID of the product to active the flag
      */
-    showFlag?: string[];
     layout?: BlackFridayLayout;
     /**
      * @title Expires at date
@@ -67,6 +71,7 @@ function Result({
     page,
     layout,
     cardLayout,
+    blackFriday,
 }: Omit<Props, "page"> & { page: ProductListingPage }) {
     const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
     const perPage = pageInfo.recordPerPage || products.length;
