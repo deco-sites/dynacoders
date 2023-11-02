@@ -6,7 +6,7 @@ import SearchControls from "$store/islands/SearchControls.tsx";
 import { useOffer } from "$store/sdk/useOffer.ts";
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-import ProductGallery, { Columns } from "./ProductGalleryBF.tsx";
+import ProductGalleryBF, { Columns } from "./ProductGalleryBF.tsx";
 
 export interface Layout {
     /**
@@ -60,7 +60,7 @@ function Result({
                         </aside>
                     )}
                     <div class="flex-grow">
-                        <ProductGallery
+                        <ProductGalleryBF
                             products={products}
                             offset={offset}
                             layout={{

@@ -1,4 +1,4 @@
-import ProductCard, { Layout as CardLayout } from "./ProductCardBF.tsx";
+import ProductCardBF, { Layout as CardLayout } from "./ProductCardBF.tsx";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { Product } from "apps/commerce/types.ts";
 
@@ -28,7 +28,7 @@ const DESKTOP_COLUMNS = {
     5: "sm:grid-cols-5",
 };
 
-function ProductGallery({ products, layout, offset }: Props) {
+function ProductGalleryBF({ products, layout, offset }: Props) {
     const platform = usePlatform();
     const mobile = MOBILE_COLUMNS[layout?.columns?.mobile ?? 2];
     const desktop = DESKTOP_COLUMNS[layout?.columns?.desktop ?? 4];
@@ -36,7 +36,7 @@ function ProductGallery({ products, layout, offset }: Props) {
     return (
         <div class={`grid ${mobile} gap-2 items-center ${desktop} sm:gap-10`}>
             {products?.map((product, index) => (
-                <ProductCard
+                <ProductCardBF
                     product={product}
                     preload={index === 0}
                     index={offset + index}
@@ -48,4 +48,4 @@ function ProductGallery({ products, layout, offset }: Props) {
     );
 }
 
-export default ProductGallery;
+export default ProductGalleryBF;
