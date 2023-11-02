@@ -19,7 +19,36 @@ export interface Layout {
     columns?: Columns;
 }
 
+export interface BlackFridayLayout {
+    // Changes made by us start here
+    flagText?: string;
+    /**
+     * @format color
+     */
+    flagTextColor?: string;
+    /**
+     * @format color
+     */
+    flagColor?: string;
+    // Changes made by us end here
+}
+
+export interface BlackFriday {
+    /**
+     * @title Product ID
+     * @description Insert the ID of the product to active the flag
+     */
+    showFlag?: string[];
+    layout?: BlackFridayLayout;
+    /**
+     * @title Expires at date
+     * @format datetime
+     */
+    countdown?: string;
+}
+
 export interface Props {
+    blackFriday?: BlackFriday;
     /** @title Integration */
     page: ProductListingPage | null;
     layout?: Layout;
