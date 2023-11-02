@@ -1,10 +1,9 @@
 {
   "imports": {
     "deco-sites/dynacoders/": "./",
-
     "$store/": "./",
-    "deco/": "https://denopkg.com/deco-cx/deco@1.45.1/",
-    "apps/": "https://denopkg.com/deco-cx/apps@0.19.2/",
+    "deco/": "https://denopkg.com/deco-cx/deco@1.45.6/",
+    "apps/": "https://denopkg.com/deco-cx/apps@0.19.5/",
     "$fresh/": "https://denopkg.com/denoland/fresh@7ad4610e3a42aba42638cbc1041b96ee58a9b29e/",
     "preact": "https://esm.sh/preact@10.15.1",
     "preact/": "https://esm.sh/preact@10.15.1/",
