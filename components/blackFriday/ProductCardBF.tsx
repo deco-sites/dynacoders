@@ -97,6 +97,8 @@ Props) {
     const possibilities = useVariantPossibilities(hasVariant, product);
     const variants = Object.entries(Object.values(possibilities)[0] ?? {});
 
+    console.log("product: ", product);
+
     const l = layout;
     const align =
         !l?.basics?.contentAlignment || l?.basics?.contentAlignment == "Left"
