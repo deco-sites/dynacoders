@@ -38,6 +38,7 @@ import * as $$$$$$30 from "./sections/Links/LinkTree.tsx";
 import * as $$$$$$31 from "./sections/Links/Shortcuts.tsx";
 import * as $$$$$$32 from "./sections/Newsletter/Newsletter.tsx";
 import * as $$$$$$33 from "./sections/Header/Header.tsx";
+import * as $$$$$$34 from "./sections/BlackFriday/SearchResultBF.tsx";
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 
@@ -47,6 +48,7 @@ const manifest = {
     "deco-sites/dynacoders/loaders/List/Sections.tsx": $$$1,
   },
   "sections": {
+    "deco-sites/dynacoders/sections/BlackFriday/SearchResultBF.tsx": $$$$$$34,
     "deco-sites/dynacoders/sections/Category/CategoryBanner.tsx": $$$$$$2,
     "deco-sites/dynacoders/sections/Category/CategoryList.tsx": $$$$$$3,
     "deco-sites/dynacoders/sections/Content/Benefits.tsx": $$$$$$15,

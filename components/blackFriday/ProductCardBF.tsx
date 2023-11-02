@@ -38,6 +38,8 @@ export interface Layout {
 }
 
 interface Props {
+    promotionFlag?: boolean;
+
     product: Product;
     /** Preload card image */
     preload?: boolean;
@@ -67,6 +69,7 @@ function ProductCard({
     layout,
     platform,
     index,
+    promotionFlag,
 }: Props) {
     const {
         url,
@@ -125,6 +128,21 @@ function ProductCard({
       `}
             data-deco="view-product"
         >
+            {/*console.log JUST SHOWING THE ID, REMOVE LATTER */}
+            <span>{productID}</span>
+            {/* {promotionFlag && (
+                <div
+                    style={{
+                        background: layout?.flagColor,
+                        color: layout?.flagTextColor,
+                    }}
+                    class={`absolute right-[-40px] z-[1] top-5 flex h-fit w-3/4 rotate-45 items-center justify-center`}
+                >
+                    <div class="mx-auto flex w-3/4 justify-center py-2">
+                        <p class="text-sm">{layout?.flagText}</p>
+                    </div>
+                </div>
+            )} */}
             <SendEventOnClick
                 id={id}
                 event={{

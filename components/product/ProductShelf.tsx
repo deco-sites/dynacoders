@@ -13,11 +13,6 @@ import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 
 export interface Props {
-    /**
-     * @title Product ID
-     * @description Insert the ID of the product to active the flag
-     */
-    showFlag?: string[];
     products: Product[] | null;
     title?: string;
     description?: string;
@@ -34,7 +29,6 @@ function ProductShelf({
     description,
     layout,
     cardLayout,
-    showFlag,
 }: Props) {
     const id = useId();
     const platform = usePlatform();
@@ -63,9 +57,6 @@ function ProductShelf({
                             class="carousel-item w-[270px] sm:w-[292px] first:pl-6 sm:first:pl-0 last:pr-6 sm:last:pr-0"
                         >
                             <ProductCard
-                                promotionFlag={showFlag?.includes(
-                                    product.productID
-                                )}
                                 product={product}
                                 itemListName={title}
                                 layout={cardLayout}
