@@ -38,8 +38,6 @@ export interface Layout {
 }
 
 interface Props {
-    promotionFlag?: boolean;
-
     product: Product;
     /** Preload card image */
     preload?: boolean;
@@ -62,14 +60,13 @@ const relative = (url: string) => {
 const WIDTH = 200;
 const HEIGHT = 279;
 
-function ProductCard({
+function ProductCardBF({
     product,
     preload,
     itemListName,
     layout,
     platform,
     index,
-    promotionFlag,
 }: Props) {
     const {
         url,
@@ -367,4 +364,4 @@ function ProductCard({
     );
 }
 
-export default ProductCard;
+export default ProductCardBF;
