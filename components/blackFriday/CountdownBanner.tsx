@@ -43,11 +43,32 @@ function CountdownBanner({ initialDate, timer }: Props) {
 
     return (
         <>
-            <h2>
-                <span class="text-xl font-medium text-base-100">
-                    {`${days.value} d ${hours.value} h ${minutes.value} m ${seconds.value} s`}
-                </span>
-            </h2>
+            <div className="grid grid-flow-col gap-5 text-center text-white auto-cols-max ">
+                <div className="flex flex-col ">
+                    <span className=" font-mono text-5xl text-orange-500">
+                        {`${days.value.toString().padStart(2, "0")}`}
+                    </span>
+                    days
+                </div>
+                <div className="flex flex-col">
+                    <span className=" font-mono text-5xl text-orange-500">
+                        {`${hours.value.toString().padStart(2, "0")}`}
+                    </span>
+                    hours
+                </div>
+                <div className="flex flex-col">
+                    <span className=" font-mono text-5xl text-orange-500">
+                        {`${minutes.value.toString().padStart(2, "0")}`}
+                    </span>
+                    min
+                </div>
+                <div className="flex flex-col">
+                    <span className=" font-mono text-5xl text-orange-500">
+                        {`${seconds.value.toString().padStart(2, "0")}`}
+                    </span>
+                    sec
+                </div>
+            </div>
         </>
     );
 }
