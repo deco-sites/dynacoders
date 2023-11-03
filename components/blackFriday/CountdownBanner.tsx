@@ -11,6 +11,7 @@ function CountdownBanner({ initialDate, timer }: Props) {
     const minutes = useSignal(0);
     const seconds = useSignal(0);
     const timerOn = useSignal(timer);
+    const end = useSignal(false);
 
     if (timerOn && initialDate) {
         const distance = useSignal(0);
@@ -35,12 +36,16 @@ function CountdownBanner({ initialDate, timer }: Props) {
             // Output the result in an element with id="demo"
             timerOn.value = !timerOn.value;
             // If the count down is over, write some text
-            if (distance.value < 0) {
+            if (distance.value <= 0) {
+                end.value = true;
                 clearInterval(x);
             }
         }, 1000);
     }
 
+    if (end.value === true) {
+        return <></>;
+    }
     return (
         <>
             <div className="grid grid-flow-col gap-5 text-center text-white auto-cols-max ">

@@ -56,6 +56,9 @@ interface Props {
     flagColor?: string;
     flagTextColor?: string;
     countdown?: string;
+    countdownDefaultColor?: string;
+    countdownLessDay?: string;
+    countdownLessHour?: string;
     countdownProd?: BlackFridayCountdownProd[];
     // end of changes
 }
@@ -79,6 +82,9 @@ function ProductCardBF({
     flagColor,
     flagTextColor,
     countdown,
+    countdownDefaultColor,
+    countdownLessDay,
+    countdownLessHour,
     countdownProd,
 }: // end of hanges
 Props) {
@@ -377,6 +383,9 @@ Props) {
                 {countdown && (
                     <ProductCountdownBF
                         countdown={productCountdown ?? countdown}
+                        countdownDefaultColor={countdownDefaultColor}
+                        countdownLessDay={countdownLessDay}
+                        countdownLessHour={countdownLessHour}
                     />
                 )}
 

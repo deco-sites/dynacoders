@@ -13,6 +13,7 @@ export interface Banner {
     title?: string;
     /** @description text to be rendered on top of the image */
     subtitle?: string;
+    url?: string;
     image: {
         /** @description Image for big screens */
         desktop: ImageWidget;
@@ -35,6 +36,7 @@ const DEFAULT_PROPS = {
             title: "Black Friday",
             matcher: "/blackfriday",
             subtitle: "Descontos imperdíveis!",
+            url: "#",
         },
     ],
 };
@@ -47,10 +49,14 @@ function Banner(props: SectionProps<ReturnType<typeof loader>>) {
         return null;
     }
 
-    const { title, subtitle, image } = banner;
+    const { title, subtitle, image, url } = banner;
 
     return (
-        <div class="grid grid-cols-1 grid-rows-1 pt-6 lg:pt-0">
+        <div class="grid grid-cols-1 grid-rows-1 mt-6 lg:pt-0 relative">
+            <a
+                href={url}
+                class="absolute z-[10] w-full h-full top-0 left-0 right-0 bottom-0"
+            ></a>
             <Picture
                 preload
                 class="col-start-1 col-span-1 row-start-1 row-span-1"
@@ -77,12 +83,12 @@ function Banner(props: SectionProps<ReturnType<typeof loader>>) {
             <div class="container flex flex-col sm:flex-row items-center justify-center col-start-1 col-span-1 row-start-1 row-span-1 w-full">
                 <div class="container flex flex-col items-center justify-center sm:items-start col-start-1 col-span-1 row-start-1 row-span-1 w-full">
                     <h1>
-                        <span class="text-5xl font-medium text-base-100">
+                        <span class="text-5xl font-bold text-base-100">
                             {title}
                         </span>
                     </h1>
                     <h2>
-                        <span class="text-xl font-medium text-base-100">
+                        <span class="text-xl font-bold text-base-100">
                             {subtitle}
                         </span>
                     </h2>

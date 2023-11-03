@@ -22,6 +22,9 @@ export interface Props {
     };
     countdown?: string;
     countdownProd?: BlackFridayCountdownProd[];
+    countdownDefaultColor?: string;
+    countdownLessDay?: string;
+    countdownLessHour?: string;
 }
 
 const MOBILE_COLUMNS = {
@@ -48,6 +51,9 @@ function ProductGalleryBF({
     offset,
     countdown,
     countdownProd,
+    countdownDefaultColor,
+    countdownLessDay,
+    countdownLessHour,
 }: Props) {
     const platform = usePlatform();
     const mobile = MOBILE_COLUMNS[layout?.columns?.mobile ?? 2];
@@ -71,6 +77,9 @@ function ProductGalleryBF({
                     index={offset + index}
                     layout={layout?.card}
                     platform={platform}
+                    countdownDefaultColor={countdownDefaultColor}
+                    countdownLessDay={countdownLessDay}
+                    countdownLessHour={countdownLessHour}
                 />
             ))}
         </div>
