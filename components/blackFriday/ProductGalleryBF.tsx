@@ -15,8 +15,7 @@ export interface Props {
     layout?: {
         card?: CardLayout;
         columns?: Columns;
-        // Changes
-        flagText?: string;
+        // Changes;
         flagTextColor?: string;
         flagColor?: string;
         // end of changes
@@ -55,7 +54,6 @@ function ProductGalleryBF({ products, layout, offset }: Props) {
                 <ProductCardBF
                     // Changes
                     flagColor={layout?.flagColor} // Flag background color
-                    flagText={layout?.flagText} // Flag text content
                     flagTextColor={layout?.flagTextColor} // Flag text color
                     // End of changes
                     product={product}
