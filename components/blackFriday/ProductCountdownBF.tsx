@@ -7,8 +7,6 @@ export interface Props {
 function ProductCountdownBF(props: Props) {
     const { countdown } = props;
 
-    console.log("ProductCountdownBF: ", ProductCountdownBF);
-
     const [days, hours, minutes, seconds] = useCountdown(countdown);
 
     return (
