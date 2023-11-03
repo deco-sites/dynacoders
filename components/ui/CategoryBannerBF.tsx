@@ -1,4 +1,5 @@
 import { Picture, Source } from "apps/website/components/Picture.tsx";
+import CountdownBanner from "$store/islands/CountdownBanner.tsx";
 import type { SectionProps } from "deco/types.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
@@ -26,20 +27,21 @@ const DEFAULT_PROPS = {
     banners: [
         {
             image: {
-                mobile: "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/91102b71-4832-486a-b683-5f7b06f649af",
+                mobile: "https://images.unsplash.com/photo-1651833826115-7530e72ce504?auto=format&fit=crop&q=80&w=2160&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                 desktop:
-                    "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/ec597b6a-dcf1-48ca-a99d-95b3c6304f96",
+                    "https://images.unsplash.com/photo-1651833826115-7530e72ce504?auto=format&fit=crop&q=80&w=2160&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                 alt: "a",
             },
-            title: "Woman",
-            matcher: "/*",
-            subtitle: "As",
+            title: "Black Friday",
+            matcher: "/blackfriday",
+            subtitle: "Descontos imperdíveis!",
         },
     ],
 };
 
 function Banner(props: SectionProps<ReturnType<typeof loader>>) {
     const { banner } = props;
+    const { countdown, timer } = props.props;
 
     if (!banner) {
         return null;
@@ -48,7 +50,7 @@ function Banner(props: SectionProps<ReturnType<typeof loader>>) {
     const { title, subtitle, image } = banner;
 
     return (
-        <div class="grid grid-cols-1 grid-rows-1">
+        <div class="grid grid-cols-1 grid-rows-1 pt-6 lg:pt-0">
             <Picture
                 preload
                 class="col-start-1 col-span-1 row-start-1 row-span-1"
@@ -66,23 +68,33 @@ function Banner(props: SectionProps<ReturnType<typeof loader>>) {
                     media="(min-width: 767px)"
                 />
                 <img
-                    class="w-full"
+                    class="w-full h-full"
                     src={image.desktop}
                     alt={image.alt ?? title}
                 />
             </Picture>
 
-            <div class="container flex flex-col items-center justify-center sm:items-start col-start-1 col-span-1 row-start-1 row-span-1 w-full">
-                <h1>
-                    <span class="text-5xl font-medium text-base-100">
-                        {title}
-                    </span>
-                </h1>
-                <h2>
-                    <span class="text-xl font-medium text-base-100">
-                        {subtitle}
-                    </span>
-                </h2>
+            <div class="container flex flex-col sm:flex-row items-center justify-center col-start-1 col-span-1 row-start-1 row-span-1 w-full">
+                <div class="container flex flex-col items-center justify-center sm:items-start col-start-1 col-span-1 row-start-1 row-span-1 w-full">
+                    <h1>
+                        <span class="text-5xl font-medium text-base-100">
+                            {title}
+                        </span>
+                    </h1>
+                    <h2>
+                        <span class="text-xl font-medium text-base-100">
+                            {subtitle}
+                        </span>
+                    </h2>
+                </div>
+                <div>
+                    {timer && countdown && (
+                        <CountdownBanner
+                            timer={timer}
+                            initialDate={countdown}
+                        />
+                    )}
+                </div>
             </div>
         </div>
     );
@@ -90,6 +102,12 @@ function Banner(props: SectionProps<ReturnType<typeof loader>>) {
 
 export interface Props {
     banners?: Banner[];
+    /**
+     * @title Expires at date
+     * @format datetime
+     */
+    countdown?: string;
+    timer?: boolean;
 }
 
 export const loader = (props: Props, req: Request) => {
@@ -98,8 +116,7 @@ export const loader = (props: Props, req: Request) => {
     const banner = banners.find(({ matcher }) =>
         new URLPattern({ pathname: matcher }).test(req.url)
     );
-
-    return { banner };
+    return { banner, props };
 };
 
 export default Banner;

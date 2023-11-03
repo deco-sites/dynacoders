@@ -8,50 +8,45 @@ import Navbar from "./Navbar.tsx";
 import { headerHeight } from "./constants.ts";
 
 export interface Props {
-  alerts: string[];
+    alerts: string[];
 
-  /** @title Search Bar */
-  searchbar?: Omit<SearchbarProps, "platform">;
+    /** @title Search Bar */
+    searchbar?: Omit<SearchbarProps, "platform">;
 
-  /**
-   * @title Navigation items
-   * @description Navigation items used both on mobile and desktop menus
-   */
-  navItems?: SiteNavigationElement[] | null;
+    /**
+     * @title Navigation items
+     * @description Navigation items used both on mobile and desktop menus
+     */
+    navItems?: SiteNavigationElement[] | null;
 
-  /** @title Logo */
-  logo?: { src: ImageWidget; alt: string };
+    /** @title Logo */
+    logo?: { src: ImageWidget; alt: string };
 }
 
-function Header({
-  alerts,
-  searchbar,
-  navItems,
-  logo,
-}: Props) {
-  const platform = usePlatform();
-  const items = navItems ?? [];
+function Header({ alerts, searchbar, navItems, logo }: Props) {
+    const platform = usePlatform();
+    const items = navItems ?? [];
 
-  return (
-    <>
-      <header style={{ height: headerHeight }}>
-        <Drawers
-          menu={{ items }}
-          searchbar={searchbar}
-          platform={platform}
-        >
-          <div class="bg-base-100 fixed w-full z-50">
-            <Alert alerts={alerts} />
-            <Navbar
-              items={items}
-              searchbar={searchbar && { ...searchbar, platform }}
-              logo={logo}
-            />
-          </div>
-        </Drawers>
-      </header>
-    </>
-  );
+    return (
+        <>
+            <header style={{ height: headerHeight }}>
+                <Drawers
+                    menu={{ items }}
+                    searchbar={searchbar}
+                    platform={platform}
+                >
+                    <div class="bg-base-100 fixed w-full z-50">
+                        <Alert alerts={alerts} />
+                        <Navbar
+                            items={items}
+                            searchbar={searchbar && { ...searchbar, platform }}
+                            logo={logo}
+                        />
+                    </div>
+                </Drawers>
+            </header>
+        </>
+    );
 }
 
 export default Header;

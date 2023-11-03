@@ -8,6 +8,8 @@ import { useVariantPossibilities } from "$store/sdk/useVariantPossiblities.ts";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Image from "apps/website/components/Image.tsx";
+import ProductCountdownBF from "$store/islands/ProductCountdownBF.tsx";
+import { BlackFridayCountdownProd } from "./SearchResultBF.tsx";
 
 export interface Layout {
     basics?: {
@@ -50,6 +52,12 @@ interface Props {
 
     layout?: Layout;
     platform?: Platform;
+    // Changes
+    flagColor?: string;
+    flagTextColor?: string;
+    countdown?: string;
+    countdownProd?: BlackFridayCountdownProd[];
+    // end of changes
 }
 
 const relative = (url: string) => {
@@ -60,14 +68,20 @@ const relative = (url: string) => {
 const WIDTH = 200;
 const HEIGHT = 279;
 
-function ProductCard({
+function ProductCardBF({
     product,
     preload,
     itemListName,
     layout,
     platform,
     index,
-}: Props) {
+    // Changes
+    flagColor,
+    flagTextColor,
+    countdown,
+    countdownProd,
+}: // end of hanges
+Props) {
     const {
         url,
         productID,
@@ -106,25 +120,77 @@ function ProductCard({
         <a
             href={url && relative(url)}
             aria-label="view product"
-            class="btn btn-block"
+            class="btn border-0 bg-orange-400 text-white hover:bg-orange-500"
         >
             {l?.basics?.ctaText || "Ver produto"}
         </a>
     );
 
+    const productCountdown =
+        countdownProd &&
+        countdownProd.find(
+            (el: BlackFridayCountdownProd) => el.prodID == productID
+        )
+            ? countdownProd.find(
+                  (el: BlackFridayCountdownProd) => el.prodID == productID
+              )?.countdown
+            : countdown;
+
     return (
         <div
             id={id}
-            class={`card overflow-hidden card-compact group w-full ${
+            class={`card card-compact overflow-hidden group w-full xl:w-3/4 ${
                 align === "center" ? "text-center" : "text-start"
             } ${l?.onMouseOver?.showCardShadow ? "lg:hover:card-bordered" : ""}
         ${
             l?.onMouseOver?.card === "Move up" &&
-            "duration-500 transition-translate ease-in-out lg:hover:-translate-y-2"
+            "duration-500 transition-translate ease-in-out md:hover:-translate-y-2"
         }
       `}
             data-deco="view-product"
         >
+            <div className="flex items-center text-xs sm:text-sm bg-orange-400 font-bold text-white px-3 py-1 rounded-full absolute z-10 top-1 left-1">
+                <span>
+                    {/* Print out the discount percentage, using math.round to avoid long numbers */}
+                    {listPrice &&
+                        price &&
+                        `- ${Math.round(
+                            ((listPrice - price) * 100) / listPrice
+                        )}% `}
+                </span>
+            </div>
+            <div
+                style={{
+                    background: flagColor ?? "#0F0F0F",
+                    color: flagTextColor ?? "#FFFFFF",
+                }}
+                class={`absolute left-[29%] top-[8%] z-[1] flex h-fit w-full rotate-45 items-center justify-center`}
+            >
+                <div class="flex w-full justify-center py-1">
+                    {/* Display the text based on the discount percentage */}
+                    {/* {formatPrice(listPrice, offers?.priceCurrency)} */}
+                    {/* {formatPrice(price, offers?.priceCurrency)} */}
+                    {listPrice && price && (
+                        <div class="flex items-end text-[0.60rem] gap-1 2xl:text-[0.65rem] tracking-wide font-semibold">
+                            <span>BLACK FRIDAY</span>
+                            <svg
+                                width="13"
+                                height="13"
+                                viewBox="0 0 16 16"
+                                fill="white"
+                                xmlns="https://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M2 1C1.73478 1 1.48043 1.10536 1.29289 1.29289C1.10536 1.48043 1 1.73478 1 2V6.586C1.00006 6.8512 1.10545 7.10551 1.293 7.293L8.293 14.293C8.48053 14.4805 8.73484 14.5858 9 14.5858C9.26517 14.5858 9.51947 14.4805 9.707 14.293L14.293 9.707C14.4805 9.51947 14.5858 9.26517 14.5858 9C14.5858 8.73484 14.4805 8.48053 14.293 8.293L7.293 1.293C7.10551 1.10545 6.8512 1.00006 6.586 1H2ZM6 4.5C6 4.89783 5.84197 5.27936 5.56066 5.56066C5.27936 5.84197 4.89783 6 4.5 6C4.10218 6 3.72064 5.84197 3.43934 5.56066C3.15804 5.27936 3 4.89783 3 4.5C3 4.10218 3.15804 3.72064 3.43934 3.43934C3.72064 3.15804 4.10218 3 4.5 3C4.89783 3 5.27936 3.15804 5.56066 3.43934C5.84197 3.72064 6 4.10218 6 4.5Z"
+                                    className={"fill-yellow-300"}
+                                ></path>
+                            </svg>
+                        </div>
+                    )}
+                </div>
+            </div>
             <SendEventOnClick
                 id={id}
                 event={{
@@ -146,28 +212,6 @@ function ProductCard({
                 class="relative overflow-hidden"
                 style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}
             >
-                {/* Wishlist button */}
-                <div
-                    class={`absolute top-2 z-10
-          ${
-              l?.elementsPositions?.favoriteIcon === "Top left"
-                  ? "left-2"
-                  : "right-2"
-          }
-          ${
-              l?.onMouseOver?.showFavoriteIcon
-                  ? "lg:hidden lg:group-hover:block"
-                  : "lg:hidden"
-          }
-        `}
-                >
-                    {platform === "vtex" && (
-                        <WishlistButton
-                            productGroupID={productGroupID}
-                            productID={productID}
-                        />
-                    )}
-                </div>
                 {/* Product Images */}
                 <a
                     href={url && relative(url)}
@@ -181,7 +225,7 @@ function ProductCard({
                         height={HEIGHT}
                         class={`bg-base-100 col-span-full row-span-full rounded w-full ${
                             l?.onMouseOver?.image == "Zoom image"
-                                ? "duration-100 transition-scale scale-100 lg:group-hover:scale-125"
+                                ? "duration-100 transition-scale scale-100 lg:group-hover:scale-110"
                                 : ""
                         }`}
                         sizes="(max-width: 640px) 50vw, 20vw"
@@ -264,7 +308,7 @@ function ProductCard({
                             <div
                                 class="truncate text-sm lg:text-sm text-neutral"
                                 dangerouslySetInnerHTML={{
-                                    __html: description ?? "",
+                                    __html: `${productID} ${description}` ?? "",
                                 }}
                             />
                         )}
@@ -294,7 +338,7 @@ function ProductCard({
                             >
                                 {formatPrice(listPrice, offers?.priceCurrency)}
                             </div>
-                            <div class="text-accent text-base lg:text-xl">
+                            <div class="text-base text-orange-700 lg:text-xl">
                                 {formatPrice(price, offers?.priceCurrency)}
                             </div>
                         </div>
@@ -330,6 +374,11 @@ function ProductCard({
                         )}
                     </>
                 )}
+                {countdown && (
+                    <ProductCountdownBF
+                        countdown={productCountdown ?? countdown}
+                    />
+                )}
 
                 {!l?.hide?.cta ? (
                     <div
@@ -347,4 +396,4 @@ function ProductCard({
     );
 }
 
-export default ProductCard;
+export default ProductCardBF;
