@@ -8,6 +8,7 @@ import { useVariantPossibilities } from "$store/sdk/useVariantPossiblities.ts";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Image from "apps/website/components/Image.tsx";
+import ProductCountdownBF from "$store/islands/ProductCountdownBF.tsx";
 
 export interface Layout {
     basics?: {
@@ -53,6 +54,7 @@ interface Props {
     // Changes
     flagColor?: string;
     flagTextColor?: string;
+    countdown?: string;
     // end of changes
 }
 
@@ -74,6 +76,7 @@ function ProductCardBF({
     // Changes
     flagColor,
     flagTextColor,
+    countdown,
 }: // end of hanges
 Props) {
     const {
@@ -358,6 +361,7 @@ Props) {
                         )}
                     </>
                 )}
+                {countdown && <ProductCountdownBF countdown={countdown} />}
 
                 {!l?.hide?.cta ? (
                     <div
