@@ -34,6 +34,19 @@ export interface BlackFridayLayout {
     // Changes made by us end here
 }
 
+export interface BlackFridayCountdownProd {
+    /**
+     * @title Product BlackFriday timer
+     * @format datetime
+     */
+    countdown: string;
+    /**
+     * @title Product ID
+     * @description Insert the ID of the product to have a countdown
+     */
+    prodID: string;
+}
+
 export interface BlackFriday {
     /**
      * @title Product ID
@@ -41,10 +54,15 @@ export interface BlackFriday {
      */
     layout?: BlackFridayLayout;
     /**
-     * @title Expires at date
+     * @title Global BlackFriday timer
      * @format datetime
      */
     countdown?: string;
+    /**
+     * @title Countdown per product
+     * @description if product doesnt have a countdown it will get from global blackfriday timer
+     */
+    countdownProd?: BlackFridayCountdownProd[];
 }
 
 export interface Props {
@@ -103,6 +121,7 @@ function Result({
                                 // changes ends here
                             }}
                             countdown={blackFriday?.countdown}
+                            countdownProd={blackFriday?.countdownProd}
                         />
                     </div>
                 </div>
