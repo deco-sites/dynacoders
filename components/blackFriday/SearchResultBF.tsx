@@ -102,6 +102,7 @@ function Result({
                                 flagColor: blackFriday?.layout?.flagColor,
                                 // changes ends here
                             }}
+                            countdown={blackFriday?.countdown}
                         />
                     </div>
                 </div>

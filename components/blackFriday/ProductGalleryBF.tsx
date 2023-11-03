@@ -21,6 +21,7 @@ export interface Props {
         flagColor?: string;
         // end of changes
     };
+    countdown?: string;
 }
 
 const MOBILE_COLUMNS = {
@@ -41,7 +42,7 @@ const DESKTOP_COLUMNS = {
     5: "lg:grid-cols-5",
 };
 
-function ProductGalleryBF({ products, layout, offset }: Props) {
+function ProductGalleryBF({ products, layout, offset, countdown }: Props) {
     const platform = usePlatform();
     const mobile = MOBILE_COLUMNS[layout?.columns?.mobile ?? 2];
     const tablet = TABLET_COLUMNS[layout?.columns?.tablet ?? 3];
@@ -57,6 +58,7 @@ function ProductGalleryBF({ products, layout, offset }: Props) {
                     flagColor={layout?.flagColor} // Flag background color
                     flagText={layout?.flagText} // Flag text content
                     flagTextColor={layout?.flagTextColor} // Flag text color
+                    countdown={countdown} //countdown string
                     // End of changes
                     product={product}
                     preload={index === 0}
