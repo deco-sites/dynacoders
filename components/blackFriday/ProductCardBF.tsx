@@ -9,6 +9,7 @@ import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Image from "apps/website/components/Image.tsx";
 import ProductCountdownBF from "$store/islands/ProductCountdownBF.tsx";
+import { BlackFridayCountdownProd } from "./SearchResultBF.tsx";
 
 export interface Layout {
     basics?: {
@@ -55,6 +56,7 @@ interface Props {
     flagColor?: string;
     flagTextColor?: string;
     countdown?: string;
+    countdownProd?: BlackFridayCountdownProd[];
     // end of changes
 }
 
@@ -77,6 +79,7 @@ function ProductCardBF({
     flagColor,
     flagTextColor,
     countdown,
+    countdownProd,
 }: // end of hanges
 Props) {
     const {
@@ -122,6 +125,16 @@ Props) {
             {l?.basics?.ctaText || "Ver produto"}
         </a>
     );
+
+    const productCountdown =
+        countdownProd &&
+        countdownProd.find(
+            (el: BlackFridayCountdownProd) => el.prodID == productID
+        )
+            ? countdownProd.find(
+                  (el: BlackFridayCountdownProd) => el.prodID == productID
+              )?.countdown
+            : countdown;
 
     return (
         <div
@@ -295,7 +308,7 @@ Props) {
                             <div
                                 class="truncate text-sm lg:text-sm text-neutral"
                                 dangerouslySetInnerHTML={{
-                                    __html: description ?? "",
+                                    __html: `${productID} ${description}` ?? "",
                                 }}
                             />
                         )}
@@ -361,7 +374,11 @@ Props) {
                         )}
                     </>
                 )}
-                {countdown && <ProductCountdownBF countdown={countdown} />}
+                {countdown && (
+                    <ProductCountdownBF
+                        countdown={productCountdown ?? countdown}
+                    />
+                )}
 
                 {!l?.hide?.cta ? (
                     <div
