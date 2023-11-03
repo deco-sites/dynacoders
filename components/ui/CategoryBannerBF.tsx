@@ -50,7 +50,7 @@ function Banner(props: SectionProps<ReturnType<typeof loader>>) {
     const { title, subtitle, image } = banner;
 
     return (
-        <div class="grid grid-cols-1 grid-rows-1">
+        <div class="grid grid-cols-1 grid-rows-1 pt-6 lg:pt-0">
             <Picture
                 preload
                 class="col-start-1 col-span-1 row-start-1 row-span-1"
@@ -68,26 +68,33 @@ function Banner(props: SectionProps<ReturnType<typeof loader>>) {
                     media="(min-width: 767px)"
                 />
                 <img
-                    class="w-full"
+                    class="w-full h-full"
                     src={image.desktop}
                     alt={image.alt ?? title}
                 />
             </Picture>
 
-            <div class="container flex flex-col items-center justify-center sm:items-start col-start-1 col-span-1 row-start-1 row-span-1 w-full">
-                <h1>
-                    <span class="text-5xl font-medium text-base-100">
-                        {title}
-                    </span>
-                </h1>
-                <h2>
-                    <span class="text-xl font-medium text-base-100">
-                        {subtitle}
-                    </span>
-                </h2>
-                {timer && countdown && (
-                    <CountdownBanner timer={timer} initialDate={countdown} />
-                )}
+            <div class="container flex flex-col sm:flex-row items-center justify-center col-start-1 col-span-1 row-start-1 row-span-1 w-full">
+                <div class="container flex flex-col items-center justify-center sm:items-start col-start-1 col-span-1 row-start-1 row-span-1 w-full">
+                    <h1>
+                        <span class="text-5xl font-medium text-base-100">
+                            {title}
+                        </span>
+                    </h1>
+                    <h2>
+                        <span class="text-xl font-medium text-base-100">
+                            {subtitle}
+                        </span>
+                    </h2>
+                </div>
+                <div>
+                    {timer && countdown && (
+                        <CountdownBanner
+                            timer={timer}
+                            initialDate={countdown}
+                        />
+                    )}
+                </div>
             </div>
         </div>
     );
