@@ -22,10 +22,6 @@ export interface Layout {
 export interface BlackFridayLayout {
     // Changes made by us start here
     /**
-     * @title Display on flag
-     */
-    flagText?: string;
-    /**
      * @title text color
      * @format color
      */
@@ -101,7 +97,6 @@ function Result({
                                 card: cardLayout,
                                 columns: layout?.columns,
                                 // changes starts here
-                                flagText: blackFriday?.layout?.flagText,
                                 flagTextColor:
                                     blackFriday?.layout?.flagTextColor,
                                 flagColor: blackFriday?.layout?.flagColor,

@@ -5,6 +5,7 @@ import { Product } from "apps/commerce/types.ts";
 
 export interface Columns {
     mobile?: 1 | 2;
+    tablet?: 2 | 3 | 4;
     desktop?: 2 | 3 | 4 | 5;
 }
 
@@ -27,24 +28,32 @@ const MOBILE_COLUMNS = {
     2: "grid-cols-2",
 };
 
-const DESKTOP_COLUMNS = {
+const TABLET_COLUMNS = {
     2: "sm:grid-cols-2",
     3: "sm:grid-cols-3",
     4: "sm:grid-cols-4",
-    5: "sm:grid-cols-5",
+};
+
+const DESKTOP_COLUMNS = {
+    2: "lg:grid-cols-2",
+    3: "lg:grid-cols-3",
+    4: "lg:grid-cols-4",
+    5: "lg:grid-cols-5",
 };
 
 function ProductGalleryBF({ products, layout, offset }: Props) {
     const platform = usePlatform();
     const mobile = MOBILE_COLUMNS[layout?.columns?.mobile ?? 2];
+    const tablet = TABLET_COLUMNS[layout?.columns?.tablet ?? 3];
     const desktop = DESKTOP_COLUMNS[layout?.columns?.desktop ?? 4];
 
     return (
-        <div class={`grid ${mobile} gap-2 items-center ${desktop} sm:gap-10`}>
+        <div
+            class={`grid ${mobile} ${tablet} gap-2 sm:gap-x-6 sm:gap-y-10 items-center ${desktop} `}
+        >
             {products?.map((product, index) => (
                 <ProductCardBF
                     // Changes
-                    flagOn={true} // Active or not the flags. By default on in every product included on blackFriday promotion.
                     flagColor={layout?.flagColor} // Flag background color
                     flagText={layout?.flagText} // Flag text content
                     flagTextColor={layout?.flagTextColor} // Flag text color
