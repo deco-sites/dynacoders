@@ -2,7 +2,7 @@ import ProductCardBF from "$store/islands/ProductCardBF.tsx";
 import { Layout as CardLayout } from "./ProductCardBF.tsx";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { Product } from "apps/commerce/types.ts";
-
+import { BlackFridayCountdownProd } from "./SearchResultBF.tsx";
 export interface Columns {
     mobile?: 1 | 2;
     tablet?: 2 | 3 | 4;
@@ -21,6 +21,7 @@ export interface Props {
         // end of changes
     };
     countdown?: string;
+    countdownProd?: BlackFridayCountdownProd[];
 }
 
 const MOBILE_COLUMNS = {
@@ -41,7 +42,13 @@ const DESKTOP_COLUMNS = {
     5: "lg:grid-cols-5",
 };
 
-function ProductGalleryBF({ products, layout, offset, countdown }: Props) {
+function ProductGalleryBF({
+    products,
+    layout,
+    offset,
+    countdown,
+    countdownProd,
+}: Props) {
     const platform = usePlatform();
     const mobile = MOBILE_COLUMNS[layout?.columns?.mobile ?? 2];
     const tablet = TABLET_COLUMNS[layout?.columns?.tablet ?? 3];
@@ -57,6 +64,7 @@ function ProductGalleryBF({ products, layout, offset, countdown }: Props) {
                     flagColor={layout?.flagColor} // Flag background color
                     flagTextColor={layout?.flagTextColor} // Flag text color
                     countdown={countdown} //countdown string
+                    countdownProd={countdownProd}
                     // End of changes
                     product={product}
                     preload={index === 0}
