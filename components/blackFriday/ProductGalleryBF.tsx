@@ -3,6 +3,8 @@ import { Layout as CardLayout } from "./ProductCardBF.tsx";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { Product } from "apps/commerce/types.ts";
 import { BlackFridayCountdownProd } from "./SearchResultBF.tsx";
+import CountdownModalBF from "$store/islands/CountdownModalBF.tsx";
+
 export interface Columns {
     mobile?: 1 | 2;
     tablet?: 2 | 3 | 4;
@@ -22,6 +24,10 @@ export interface Props {
     };
     countdown?: string;
     countdownProd?: BlackFridayCountdownProd[];
+    countdownModalThreshold?: number;
+    countdownDefaultColor?: string;
+    countdownLessDay?: string;
+    countdownLessHour?: string;
 }
 
 const MOBILE_COLUMNS = {
@@ -48,6 +54,10 @@ function ProductGalleryBF({
     offset,
     countdown,
     countdownProd,
+    countdownModalThreshold,
+    countdownDefaultColor,
+    countdownLessDay,
+    countdownLessHour,
 }: Props) {
     const platform = usePlatform();
     const mobile = MOBILE_COLUMNS[layout?.columns?.mobile ?? 2];
@@ -58,6 +68,16 @@ function ProductGalleryBF({
         <div
             class={`grid ${mobile} ${tablet} gap-2 sm:gap-x-6 sm:gap-y-10 items-center ${desktop} `}
         >
+            <CountdownModalBF
+                countdownProd={countdownProd}
+                products={products}
+                countdownModalThreshold={countdownModalThreshold}
+                classNames={`grid gap-2 items-center grid-cols-1 sm:grid-cols-2`}
+                countdown={countdown}
+                layout={layout}
+                platform={platform}
+                offset={offset}
+            />
             {products?.map((product, index) => (
                 <ProductCardBF
                     // Changes
@@ -71,6 +91,9 @@ function ProductGalleryBF({
                     index={offset + index}
                     layout={layout?.card}
                     platform={platform}
+                    countdownDefaultColor={countdownDefaultColor}
+                    countdownLessDay={countdownLessDay}
+                    countdownLessHour={countdownLessHour}
                 />
             ))}
         </div>

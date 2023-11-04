@@ -1,1 +1,1 @@
-export { default } from "../../components/blackFriday/SearchResultBF.tsx";
+export { default } from "$store/components/blackFriday/SearchResultBF.tsx";
