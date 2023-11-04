@@ -59,6 +59,11 @@ export interface BlackFriday {
      */
     countdown?: string;
     /**
+     * @title Countdown Modal Product Time
+     * @description Define a limit to show products that will expire in hours
+     */
+    countdownModalThreshold?: number;
+    /**
      * @title Countdown per product
      * @description if product doesnt have a countdown it will get from global blackfriday timer
      */
@@ -122,6 +127,9 @@ function Result({
                             }}
                             countdown={blackFriday?.countdown}
                             countdownProd={blackFriday?.countdownProd}
+                            countdownModalThreshold={
+                                blackFriday?.countdownModalThreshold
+                            }
                         />
                     </div>
                 </div>

@@ -1,11 +1,15 @@
 import { useEffect, useState } from "preact/compat";
 
-const useCountdown = (targetDate: string) => {
+const useCountdown = (targetDate: string, staticValues?: boolean) => {
   const countDownDate = new Date(targetDate).getTime();
 
   const [countDown, setCountDown] = useState(
     countDownDate - new Date().getTime(),
   );
+
+  if (staticValues) {
+    return getReturnValues(countDown);
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
