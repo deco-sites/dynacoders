@@ -10,7 +10,7 @@ import type { Platform } from "$store/apps/site.ts";
 export interface Props {
     countdownProd?: BlackFridayCountdownProd[];
     products?: Product[] | null;
-    countdownModalThreshold?: number;
+    countdownModalThreshold: number;
     classNames: string;
     countdown?: string;
     layout?: {
@@ -33,23 +33,29 @@ const CountdownModalBF = (props: Props) => {
         offset,
     } = props;
 
-    const prods = useSignal<any>([]);
+    const prods = useSignal<Product[]>([]);
 
-    console.log("countdownProd: ", countdownProd);
-    console.log("product: ", products);
-    console.log("countdownModalThreshold: ", countdownModalThreshold);
+    function checkProdCountdownThreshold(countdown: string) {
+        const [days, hours] = useCountdown(countdown, true);
+        if (days + hours < countdownModalThreshold) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     if (products && countdownProd && countdownModalThreshold) {
         prods.value = products.filter((el: Product) => {
             if (
                 countdownProd.some(
-                    (cd) => cd.prodID === el.productID && cd.countdown
+                    (cd) =>
+                        checkProdCountdownThreshold(cd.countdown) &&
+                        cd.prodID === el.productID
                 )
             ) {
                 return el;
             }
         });
-        console.log("test: ", prods.value);
     }
 
     useEffect(() => {
@@ -76,7 +82,7 @@ const CountdownModalBF = (props: Props) => {
                     </h3>
                     <div class={classNames}>
                         {prods?.value?.map(
-                            (product: any, index: number) =>
+                            (product: Product, index: number) =>
                                 index < 4 && (
                                     <ProductCardBF
                                         // Changes
