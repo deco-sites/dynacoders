@@ -55,8 +55,9 @@ const CountdownModalBF = (props: Props) => {
     useEffect(() => {
         setTimeout(() => {
             // condition to shor modal
-
-            document.getElementById("my_modal_7").checked = true;
+            if (prods.value.length) {
+                document.getElementById("my_modal_7").checked = true;
+            }
         }, 2000);
     }, []);
 
