@@ -145,7 +145,7 @@ Props) {
     return (
         <div
             id={id}
-            class={`card card-compact overflow-hidden group w-full xl:w-3/4 ${
+            class={`card m-auto card-compact overflow-hidden group w-full xl:w-3/4 ${
                 align === "center" ? "text-center" : "text-start"
             } ${l?.onMouseOver?.showCardShadow ? "lg:hover:card-bordered" : ""}
         ${

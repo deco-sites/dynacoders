@@ -59,6 +59,11 @@ export interface BlackFriday {
      */
     countdown?: string;
     /**
+     * @title Countdown Modal Product Time
+     * @description Define a limit to show products that will expire in hours
+     */
+    countdownModalThreshold?: number;
+    /**
      * @title Default
      * @description Select the color for the default countdown
      * @format color
@@ -140,6 +145,9 @@ function Result({
                             }}
                             countdown={blackFriday?.countdown}
                             countdownProd={blackFriday?.countdownProd}
+                            countdownModalThreshold={
+                                blackFriday?.countdownModalThreshold
+                            }
                             countdownDefaultColor={
                                 blackFriday?.countdownDefaultColor
                             }
