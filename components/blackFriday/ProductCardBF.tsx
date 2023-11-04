@@ -56,6 +56,9 @@ interface Props {
     flagColor?: string;
     flagTextColor?: string;
     countdown?: string;
+    countdownDefaultColor?: string;
+    countdownLessDay?: string;
+    countdownLessHour?: string;
     countdownProd?: BlackFridayCountdownProd[];
     // end of changes
 }
@@ -79,6 +82,9 @@ function ProductCardBF({
     flagColor,
     flagTextColor,
     countdown,
+    countdownDefaultColor,
+    countdownLessDay,
+    countdownLessHour,
     countdownProd,
 }: // end of hanges
 Props) {
@@ -144,7 +150,7 @@ Props) {
             } ${l?.onMouseOver?.showCardShadow ? "lg:hover:card-bordered" : ""}
         ${
             l?.onMouseOver?.card === "Move up" &&
-            "duration-500 transition-translate ease-in-out lg:hover:-translate-y-2"
+            "duration-500 transition-translate ease-in-out md:hover:-translate-y-2"
         }
       `}
             data-deco="view-product"
@@ -377,6 +383,9 @@ Props) {
                 {countdown && (
                     <ProductCountdownBF
                         countdown={productCountdown ?? countdown}
+                        countdownDefaultColor={countdownDefaultColor}
+                        countdownLessDay={countdownLessDay}
+                        countdownLessHour={countdownLessHour}
                     />
                 )}
 

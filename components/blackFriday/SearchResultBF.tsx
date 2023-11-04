@@ -49,7 +49,7 @@ export interface BlackFridayCountdownProd {
 
 export interface BlackFriday {
     /**
-     * @title Product ID
+     * @title Flag
      * @description Insert the ID of the product to active the flag
      */
     layout?: BlackFridayLayout;
@@ -63,6 +63,24 @@ export interface BlackFriday {
      * @description Define a limit to show products that will expire in hours
      */
     countdownModalThreshold?: number;
+    /**
+     * @title Default
+     * @description Select the color for the default countdown
+     * @format color
+     */
+    countdownDefaultColor?: string;
+    /**
+     * @title Less them a day
+     * @description Select the color for the countdown  when it's less then a day
+     * @format color
+     */
+    countdownLessDay?: string;
+    /**
+     * @title Less them a hour
+     * @description Select the color for the countdown  when it's less then a hour
+     * @format color
+     */
+    countdownLessHour?: string;
     /**
      * @title Countdown per product
      * @description if product doesnt have a countdown it will get from global blackfriday timer
@@ -130,6 +148,11 @@ function Result({
                             countdownModalThreshold={
                                 blackFriday?.countdownModalThreshold
                             }
+                            countdownDefaultColor={
+                                blackFriday?.countdownDefaultColor
+                            }
+                            countdownLessDay={blackFriday?.countdownLessDay}
+                            countdownLessHour={blackFriday?.countdownLessHour}
                         />
                     </div>
                 </div>
