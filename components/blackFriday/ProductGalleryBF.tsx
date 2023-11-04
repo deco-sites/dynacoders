@@ -71,7 +71,7 @@ function ProductGalleryBF({
             <CountdownModalBF
                 countdownProd={countdownProd}
                 products={products}
-                countdownModalThreshold={countdownModalThreshold}
+                countdownModalThreshold={countdownModalThreshold ?? 999}
                 classNames={`grid gap-2 items-center grid-cols-1 sm:grid-cols-2`}
                 countdown={countdown}
                 layout={layout}
